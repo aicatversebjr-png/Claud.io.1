@@ -1,0 +1,15 @@
+{
+  "name": "Claud io",
+  "description": "A premium AI SaaS platform for building websites, games, and apps instantly using next-gen generative AI models.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "AI-powered website generation",
+    "AI-powered game generation",
+    "Real-time AI chat",
+    "Image analysis",
+    "Instant hosting"
+  ]
+}

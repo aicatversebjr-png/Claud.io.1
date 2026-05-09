@@ -1,0 +1,76 @@
+import { useState, useEffect } from "react";
+import Navbar from "./components/layout/Navbar";
+import Hero from "./components/landing/Hero";
+import Features from "./components/landing/Features";
+import Dashboard from "./components/dashboard/Dashboard";
+import { Toaster } from "@/components/ui/sonner";
+
+export default function App() {
+  const [page, setPage] = useState<string>("home");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [page]);
+
+  const renderContent = () => {
+    switch (page) {
+      case "dashboard":
+        return <Dashboard />;
+      case "home":
+      default:
+        return (
+          <>
+            <Hero onGetStarted={() => setPage("dashboard")} />
+            <Features />
+            <SectionComingSoon title="Pricing" />
+            <SectionComingSoon title="Docs" />
+            <Footer />
+          </>
+        );
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-brand-purple/30 selection:text-white">
+      <Navbar onNavigate={setPage} />
+      <main className="flex-1">
+        {renderContent()}
+      </main>
+      <Toaster />
+    </div>
+  );
+}
+
+function SectionComingSoon({ title }: { title: string }) {
+  return (
+    <section className="py-24 border-t border-white/5 bg-black/30">
+      <div className="max-w-7xl mx-auto px-4 text-center">
+        <h2 className="text-3xl font-display font-bold mb-4">{title}</h2>
+        <p className="text-gray-500">This section is coming soon as we scale Claud io to new heights.</p>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="py-12 border-t border-white/5 glass-dark px-4">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-50">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+          <div className="flex flex-col gap-2">
+            <span className="text-2xl font-sans font-black tracking-tighter uppercase text-white">
+              claud<span className="text-brand-purple">.io</span>
+            </span>
+            <p className="text-xs text-gray-500 font-bold uppercase tracking-widest leading-relaxed">© 2026 Claud io AI Platform. <br/> Built for the future of creation.</p>
+          </div>
+          <div className="flex gap-8 text-[11px] text-gray-400 font-black uppercase tracking-[0.2em]">
+            <a href="#" className="hover:text-purple-400 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-purple-400 transition-colors">Terms</a>
+            <a href="#" className="hover:text-purple-400 transition-colors">Twitter</a>
+            <a href="#" className="hover:text-purple-400 transition-colors">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
